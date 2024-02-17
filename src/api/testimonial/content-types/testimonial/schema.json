@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testimonials",
+  "info": {
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "Testimonial",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "draft",
+        "publish"
+      ],
+      "default": "draft",
+      "required": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "social_media_id": {
+      "type": "string"
+    },
+    "social_media_type": {
+      "type": "enumeration",
+      "enum": [
+        "facebook",
+        "x",
+        "linkedin"
+      ]
+    },
+    "comment": {
+      "type": "string",
+      "required": false
+    },
+    "description": {
+      "type": "text"
+    },
+    "profile_picture": {
+      "type": "string"
+    }
+  }
+}

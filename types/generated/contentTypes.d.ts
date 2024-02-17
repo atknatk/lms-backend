@@ -783,6 +783,78 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiStaticContentStaticContent extends Schema.CollectionType {
+  collectionName: 'static_contents';
+  info: {
+    singularName: 'static-content';
+    pluralName: 'static-contents';
+    displayName: 'StaticContent';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    key: Attribute.Enumeration<
+      ['hero_title', 'hero_underline', 'hero_info', 'masthead_text']
+    >;
+    value: Attribute.Blocks;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::static-content.static-content',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::static-content.static-content',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTestimonialTestimonial extends Schema.CollectionType {
+  collectionName: 'testimonials';
+  info: {
+    singularName: 'testimonial';
+    pluralName: 'testimonials';
+    displayName: 'Testimonial';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    status: Attribute.Enumeration<['draft', 'publish']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'draft'>;
+    name: Attribute.String;
+    social_media_id: Attribute.String;
+    social_media_type: Attribute.Enumeration<['facebook', 'x', 'linkedin']>;
+    comment: Attribute.String;
+    description: Attribute.Text;
+    profile_picture: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::testimonial.testimonial',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::testimonial.testimonial',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -801,6 +873,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::static-content.static-content': ApiStaticContentStaticContent;
+      'api::testimonial.testimonial': ApiTestimonialTestimonial;
     }
   }
 }

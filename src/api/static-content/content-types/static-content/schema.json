@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "static_contents",
+  "info": {
+    "singularName": "static-content",
+    "pluralName": "static-contents",
+    "displayName": "StaticContent"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "key": {
+      "type": "enumeration",
+      "enum": [
+        "hero_title",
+        "hero_underline",
+        "hero_info",
+        "masthead_text"
+      ]
+    },
+    "value": {
+      "type": "blocks"
+    }
+  }
+}
