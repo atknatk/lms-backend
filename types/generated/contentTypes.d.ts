@@ -783,6 +783,71 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface PluginMuxVideoUploaderMuxAsset extends Schema.CollectionType {
+  collectionName: 'muxassets';
+  info: {
+    name: 'mux-asset';
+    description: 'Represents a Mux Asset item, including upload and playback details';
+    displayName: 'Mux Asset';
+    singularName: 'mux-asset';
+    pluralName: 'mux-assets';
+  };
+  options: {
+    increments: true;
+    timestamps: true;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+        maxLength: 255;
+      }>;
+    upload_id: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    asset_id: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    playback_id: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    signed: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    error_message: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    isReady: Attribute.Boolean & Attribute.DefaultTo<false>;
+    duration: Attribute.Decimal;
+    aspect_ratio: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::mux-video-uploader.mux-asset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::mux-video-uploader.mux-asset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiBlogBlog extends Schema.CollectionType {
   collectionName: 'blogs';
   info: {
@@ -859,6 +924,7 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
     comment: Attribute.String;
     description: Attribute.Text;
     profile_picture: Attribute.String;
+    video: Attribute.JSON & Attribute.CustomField<'plugin::video-field.video'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -895,6 +961,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'plugin::mux-video-uploader.mux-asset': PluginMuxVideoUploaderMuxAsset;
       'api::blog.blog': ApiBlogBlog;
       'api::static-content.static-content': ApiStaticContentStaticContent;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
