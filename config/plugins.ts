@@ -1,1 +1,5 @@
-export default () => ({});
+export default () => ({
+    "video-field":{
+        enabled:true
+    }
+});
