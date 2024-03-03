@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_elements_pricing_plans",
+  "info": {
+    "displayName": "Pricing plan"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "period": {
+      "type": "enumeration",
+      "enum": [
+        "per week",
+        "per month",
+        "per annual"
+      ]
+    },
+    "isRecommended": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "product_features": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-feature.product-feature"
+    }
+  }
+}

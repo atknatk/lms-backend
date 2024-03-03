@@ -585,6 +585,216 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginNavigationAudience extends Schema.CollectionType {
+  collectionName: 'audience';
+  info: {
+    singularName: 'audience';
+    pluralName: 'audiences';
+    displayName: 'Audience';
+    name: 'audience';
+  };
+  options: {
+    increments: true;
+    comment: 'Audience';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    key: Attribute.UID<'plugin::navigation.audience', 'name'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::navigation.audience',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::navigation.audience',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginNavigationNavigation extends Schema.CollectionType {
+  collectionName: 'navigations';
+  info: {
+    singularName: 'navigation';
+    pluralName: 'navigations';
+    displayName: 'Navigation';
+    name: 'navigation';
+  };
+  options: {
+    increments: true;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.Text & Attribute.Required;
+    slug: Attribute.UID & Attribute.Required;
+    visible: Attribute.Boolean & Attribute.DefaultTo<false>;
+    items: Attribute.Relation<
+      'plugin::navigation.navigation',
+      'oneToMany',
+      'plugin::navigation.navigation-item'
+    >;
+    localizations: Attribute.Relation<
+      'plugin::navigation.navigation',
+      'oneToMany',
+      'plugin::navigation.navigation'
+    >;
+    localeCode: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::navigation.navigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::navigation.navigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginNavigationNavigationItem extends Schema.CollectionType {
+  collectionName: 'navigations_items';
+  info: {
+    singularName: 'navigation-item';
+    pluralName: 'navigation-items';
+    displayName: 'Navigation Item';
+    name: 'navigation-item';
+  };
+  options: {
+    increments: true;
+    timestamps: true;
+    comment: 'Navigation Item';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+    i18n: {
+      localized: false;
+    };
+  };
+  attributes: {
+    title: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    type: Attribute.Enumeration<['INTERNAL', 'EXTERNAL', 'WRAPPER']> &
+      Attribute.DefaultTo<'INTERNAL'>;
+    path: Attribute.Text;
+    externalPath: Attribute.Text;
+    uiRouterKey: Attribute.String;
+    menuAttached: Attribute.Boolean & Attribute.DefaultTo<false>;
+    order: Attribute.Integer & Attribute.DefaultTo<0>;
+    collapsed: Attribute.Boolean & Attribute.DefaultTo<false>;
+    related: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'oneToOne',
+      'plugin::navigation.navigations-items-related'
+    >;
+    parent: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'oneToOne',
+      'plugin::navigation.navigation-item'
+    >;
+    master: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'manyToOne',
+      'plugin::navigation.navigation'
+    >;
+    audience: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'oneToMany',
+      'plugin::navigation.audience'
+    >;
+    additionalFields: Attribute.JSON & Attribute.DefaultTo<{}>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::navigation.navigation-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginNavigationNavigationsItemsRelated
+  extends Schema.CollectionType {
+  collectionName: 'navigations_items_related';
+  info: {
+    singularName: 'navigations-items-related';
+    pluralName: 'navigations-items-relateds';
+    displayName: 'Navigations Items Related';
+    name: 'navigations_items_related';
+  };
+  options: {
+    increments: true;
+    timestamps: false;
+    populateCreatorFields: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+    i18n: {
+      localized: false;
+    };
+  };
+  attributes: {
+    related_id: Attribute.String & Attribute.Required;
+    related_type: Attribute.String & Attribute.Required;
+    field: Attribute.String & Attribute.Required;
+    order: Attribute.Integer & Attribute.Required;
+    master: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::navigation.navigations-items-related',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::navigation.navigations-items-related',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginI18NLocale extends Schema.CollectionType {
   collectionName: 'i18n_locale';
   info: {
@@ -783,64 +993,106 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginMuxVideoUploaderMuxAsset extends Schema.CollectionType {
-  collectionName: 'muxassets';
+export interface ApiBlogPageBlogPage extends Schema.SingleType {
+  collectionName: 'blog_pages';
   info: {
-    name: 'mux-asset';
-    description: 'Represents a Mux Asset item, including upload and playback details';
-    displayName: 'Mux Asset';
-    singularName: 'mux-asset';
-    pluralName: 'mux-assets';
+    singularName: 'blog-page';
+    pluralName: 'blog-pages';
+    displayName: 'BlogPage';
   };
   options: {
-    increments: true;
-    timestamps: true;
+    draftAndPublish: true;
   };
   pluginOptions: {
-    'content-manager': {
-      visible: true;
-    };
-    'content-type-builder': {
-      visible: true;
+    i18n: {
+      localized: true;
     };
   };
   attributes: {
-    title: Attribute.String &
+    header: Attribute.Component<'shared.header'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 3;
-        maxLength: 255;
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
       }>;
-    upload_id: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 255;
+    categoryText: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
       }>;
-    asset_id: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 255;
+    articlesPerPage: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<0>;
+    blocks: Attribute.DynamicZone<['blocks.cta', 'blocks.cta-command-line']> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
       }>;
-    playback_id: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    signed: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    error_message: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    isReady: Attribute.Boolean & Attribute.DefaultTo<false>;
-    duration: Attribute.Decimal;
-    aspect_ratio: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::mux-video-uploader.mux-asset',
+      'api::blog-page.blog-page',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::mux-video-uploader.mux-asset',
+      'api::blog-page.blog-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::blog-page.blog-page',
+      'oneToMany',
+      'api::blog-page.blog-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiGlobalGlobal extends Schema.SingleType {
+  collectionName: 'globals';
+  info: {
+    singularName: 'global';
+    pluralName: 'globals';
+    displayName: 'Global';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    metadata: Attribute.Component<'meta.metadata'>;
+    headerContactLinks: Attribute.Component<'shared.button', true>;
+    socialLinks: Attribute.Component<'links.social-link', true>;
+    favicon: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::global.global',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::global.global',
       'oneToOne',
       'admin::user'
     > &
@@ -848,25 +1100,108 @@ export interface PluginMuxVideoUploaderMuxAsset extends Schema.CollectionType {
   };
 }
 
-export interface ApiBlogBlog extends Schema.CollectionType {
-  collectionName: 'blogs';
+export interface ApiPagePage extends Schema.CollectionType {
+  collectionName: 'pages';
   info: {
-    singularName: 'blog';
-    pluralName: 'blogs';
-    displayName: 'Blog';
+    singularName: 'page';
+    pluralName: 'pages';
+    displayName: 'Page';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    content: Attribute.RichText;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    contentSections: Attribute.DynamicZone<
+      ['sections.hero', 'sections.pricing', 'sections.testimonial']
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    seo: Attribute.Component<'shared.seo'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+    createdBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
+    updatedBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::page.page',
+      'oneToMany',
+      'api::page.page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiProductFeatureProductFeature extends Schema.CollectionType {
+  collectionName: 'product_features';
+  info: {
+    singularName: 'product-feature';
+    pluralName: 'product-features';
+    displayName: 'Product Feature';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product-feature.product-feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product-feature.product-feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::product-feature.product-feature',
+      'oneToMany',
+      'api::product-feature.product-feature'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -876,13 +1211,25 @@ export interface ApiStaticContentStaticContent extends Schema.CollectionType {
     singularName: 'static-content';
     pluralName: 'static-contents';
     displayName: 'StaticContent';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     key: Attribute.Enumeration<
-      ['hero_title', 'hero_underline', 'hero_info', 'masthead_text']
+      [
+        'hero_title',
+        'hero_underline',
+        'hero_info',
+        'masthead_text',
+        'phone_number',
+        'email_address',
+        'social_facebook_address',
+        'social_x_address',
+        'social_instagram_address',
+        'social_linkedin_address'
+      ]
     >;
     value: Attribute.Blocks;
     createdAt: Attribute.DateTime;
@@ -915,9 +1262,6 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    status: Attribute.Enumeration<['draft', 'publish']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'draft'>;
     name: Attribute.String;
     social_media_id: Attribute.String;
     social_media_type: Attribute.Enumeration<['facebook', 'x', 'linkedin']>;
@@ -957,12 +1301,18 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::navigation.audience': PluginNavigationAudience;
+      'plugin::navigation.navigation': PluginNavigationNavigation;
+      'plugin::navigation.navigation-item': PluginNavigationNavigationItem;
+      'plugin::navigation.navigations-items-related': PluginNavigationNavigationsItemsRelated;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::mux-video-uploader.mux-asset': PluginMuxVideoUploaderMuxAsset;
-      'api::blog.blog': ApiBlogBlog;
+      'api::blog-page.blog-page': ApiBlogPageBlogPage;
+      'api::global.global': ApiGlobalGlobal;
+      'api::page.page': ApiPagePage;
+      'api::product-feature.product-feature': ApiProductFeatureProductFeature;
       'api::static-content.static-content': ApiStaticContentStaticContent;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;
     }
