@@ -2,10 +2,6 @@ export default () => ({
     "video-field":{
         enabled:true
     },
-    ckeditor5: {
-        enabled: true,
-        resolve: "./src/plugins/strapi-plugin-ckeditor"
-      },
       seo: {
         enabled: true,
       },

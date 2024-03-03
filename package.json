@@ -10,7 +10,6 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@_sh/strapi-plugin-ckeditor": "^2.1.1",
     "@offset-dev/strapi-calendar": "^0.1.1",
     "@sklinet/strapi-plugin-video-field": "^1.0.6",
     "@strapi/plugin-graphql": "^4.20.3",
