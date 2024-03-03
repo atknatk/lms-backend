@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_blocks_ctas",
+  "info": {
+    "displayName": "Cta",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "primary",
+        "secondary",
+        "muted"
+      ],
+      "default": "primary",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    }
+  }
+}

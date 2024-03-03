@@ -4,7 +4,8 @@
   "info": {
     "singularName": "static-content",
     "pluralName": "static-contents",
-    "displayName": "StaticContent"
+    "displayName": "StaticContent",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,7 +18,13 @@
         "hero_title",
         "hero_underline",
         "hero_info",
-        "masthead_text"
+        "masthead_text",
+        "phone_number",
+        "email_address",
+        "social_facebook_address",
+        "social_x_address",
+        "social_instagram_address",
+        "social_linkedin_address"
       ]
     },
     "value": {

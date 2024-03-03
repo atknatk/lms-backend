@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_sections_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "masterHead": {
+      "type": "string"
+    },
+    "masterHeadTitle": {
+      "type": "string"
+    },
+    "masterHeadDescription": {
+      "type": "string"
+    },
+    "masterLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.button-link"
+    },
+    "featureIconList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.feature-icon-list"
+    },
+    "heroImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

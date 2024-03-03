@@ -12,15 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "draft",
-        "publish"
-      ],
-      "default": "draft",
-      "required": true
-    },
     "name": {
       "type": "string"
     },
