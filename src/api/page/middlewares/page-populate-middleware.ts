@@ -49,7 +49,13 @@ const populate = {
         populate : true
       },
       plans: {
-        populate: ["product_features"],
+        //populate: true//["product_features", "image"],
+        populate: {
+          product_features : true,
+          image: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          }
+        }
       },
       // submitButton: {
       //   populate: true,
