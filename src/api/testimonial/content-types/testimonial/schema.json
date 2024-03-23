@@ -47,6 +47,13 @@
     },
     "position": {
       "type": "string"
+    },
+    "video_image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

@@ -1273,6 +1273,7 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
       Attribute.Required &
       Attribute.DefaultTo<false>;
     position: Attribute.String;
+    video_image: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
