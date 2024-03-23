@@ -1269,6 +1269,10 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
     description: Attribute.Text;
     profile_picture: Attribute.String;
     video: Attribute.JSON & Attribute.CustomField<'plugin::video-field.video'>;
+    is_featured: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    position: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

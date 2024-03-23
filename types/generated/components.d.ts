@@ -45,11 +45,11 @@ export interface ElementsPricingPlan extends Schema.Component {
   collectionName: 'components_elements_pricing_plans';
   info: {
     displayName: 'Pricing plan';
+    description: '';
   };
   attributes: {
     type: Attribute.String;
     price: Attribute.Decimal;
-    period: Attribute.Enumeration<['per week', 'per month', 'per annual']>;
     isRecommended: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
@@ -58,6 +58,8 @@ export interface ElementsPricingPlan extends Schema.Component {
       'oneToMany',
       'api::product-feature.product-feature'
     >;
+    planDescrioption: Attribute.String;
+    image: Attribute.Media;
   };
 }
 
@@ -121,11 +123,13 @@ export interface SectionsPricing extends Schema.Component {
   collectionName: 'components_sections_pricings';
   info: {
     displayName: 'Pricing';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     description: Attribute.String;
     plans: Attribute.Component<'elements.pricing-plan', true>;
+    yearly_discount_percentage: Attribute.Integer & Attribute.Required;
   };
 }
 
@@ -243,12 +247,12 @@ export interface SharedLink extends Schema.Component {
   collectionName: 'components_shared_links';
   info: {
     displayName: 'link';
+    description: '';
   };
   attributes: {
     href: Attribute.String & Attribute.Required;
     label: Attribute.String & Attribute.Required;
-    target: Attribute.Enumeration<['_blank']> & Attribute.Required;
-    isExternal: Attribute.Boolean & Attribute.DefaultTo<false>;
+    newTab: Attribute.Boolean & Attribute.DefaultTo<false>;
   };
 }
 

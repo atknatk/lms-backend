@@ -1,7 +1,8 @@
 {
   "collectionName": "components_shared_links",
   "info": {
-    "displayName": "link"
+    "displayName": "link",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -13,14 +14,7 @@
       "type": "string",
       "required": true
     },
-    "target": {
-      "type": "enumeration",
-      "enum": [
-        "_blank"
-      ],
-      "required": true
-    },
-    "isExternal": {
+    "newTab": {
       "type": "boolean",
       "default": false
     }

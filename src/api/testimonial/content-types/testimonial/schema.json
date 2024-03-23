@@ -39,6 +39,14 @@
     "video": {
       "type": "customField",
       "customField": "plugin::video-field.video"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "position": {
+      "type": "string"
     }
   }
 }
