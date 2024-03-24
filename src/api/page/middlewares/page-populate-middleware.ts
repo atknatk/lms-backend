@@ -7,23 +7,33 @@
 const populate = {
   contentSections: {
     populate: {
-       hero: {
+      hero: {
         populate: true,
-       },
-       masterLinks: {
+      },
+      mediaOne: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
+      mediaTwo: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
+      mediaThree: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
+
+      masterLinks: {
         populate: true,
-       },
-       heroImage: {
+      },
+      heroImage: {
         populate: true,
-       },
-       featureIconList: {
+      },
+      featureIconList: {
         populate: {
-          fields : ['id' , 'text'],
+          fields: ['id', 'text'],
           image: {
             populate: true,
           }
         },
-       },
+      },
       // buttons: {
       //   populate: true,
       // },
@@ -43,15 +53,15 @@ const populate = {
       //   },
       // },
       testimonials: {
-        populate : true
+        populate: true
       },
       counters: {
-        populate : true
+        populate: true
       },
       plans: {
         //populate: true//["product_features", "image"],
         populate: {
-          product_features : true,
+          product_features: true,
           image: {
             fields: ["url", "alternativeText", "caption", "width", "height"],
           }
@@ -62,10 +72,10 @@ const populate = {
       // },
     },
   },
-  // seo: {
-  //   fields: ["metaTitle", "metaDescription"],
-  //   populate: { shareImage: true },
-  // }
+  seo: {
+    fields: ["metaTitle", "metaDescription"],
+    populate: { shareImage: true },
+  }
 };
 
 module.exports = (config, { strapi }) => {

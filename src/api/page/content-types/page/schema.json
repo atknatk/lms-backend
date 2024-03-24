@@ -37,7 +37,8 @@
       "components": [
         "sections.hero",
         "sections.pricing",
-        "sections.testimonial"
+        "sections.testimonial",
+        "sections.about"
       ],
       "pluginOptions": {
         "i18n": {
