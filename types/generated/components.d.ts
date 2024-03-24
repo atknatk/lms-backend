@@ -103,6 +103,25 @@ export interface MetaMetadata extends Schema.Component {
   };
 }
 
+export interface SectionsAbout extends Schema.Component {
+  collectionName: 'components_sections_abouts';
+  info: {
+    displayName: 'About';
+    description: '';
+  };
+  attributes: {
+    mainTitle: Attribute.String & Attribute.Required;
+    mainDescription: Attribute.Text;
+    subTitle: Attribute.String & Attribute.Required;
+    subDescription: Attribute.Text & Attribute.Required;
+    subDescriptionMore: Attribute.Text;
+    button: Attribute.Component<'links.button-link'>;
+    mediaOne: Attribute.Media & Attribute.Required;
+    mediaTwo: Attribute.Media & Attribute.Required;
+    mediaThree: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface SectionsHero extends Schema.Component {
   collectionName: 'components_sections_heroes';
   info: {
@@ -317,6 +336,7 @@ declare module '@strapi/types' {
       'links.button-link': LinksButtonLink;
       'links.social-link': LinksSocialLink;
       'meta.metadata': MetaMetadata;
+      'sections.about': SectionsAbout;
       'sections.hero': SectionsHero;
       'sections.pricing': SectionsPricing;
       'sections.testimonial': SectionsTestimonial;

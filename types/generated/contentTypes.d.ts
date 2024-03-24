@@ -1130,7 +1130,12 @@ export interface ApiPagePage extends Schema.CollectionType {
         };
       }>;
     contentSections: Attribute.DynamicZone<
-      ['sections.hero', 'sections.pricing', 'sections.testimonial']
+      [
+        'sections.hero',
+        'sections.pricing',
+        'sections.testimonial',
+        'sections.about'
+      ]
     > &
       Attribute.SetPluginOptions<{
         i18n: {
