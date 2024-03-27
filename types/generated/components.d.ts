@@ -122,6 +122,19 @@ export interface SectionsAbout extends Schema.Component {
   };
 }
 
+export interface SectionsFaq extends Schema.Component {
+  collectionName: 'components_sections_faqs';
+  info: {
+    displayName: 'Faq';
+    description: '';
+  };
+  attributes: {
+    faqs: Attribute.Relation<'sections.faq', 'oneToMany', 'api::faq.faq'>;
+    mainTitle: Attribute.String;
+    mainDescription: Attribute.Text;
+  };
+}
+
 export interface SectionsHero extends Schema.Component {
   collectionName: 'components_sections_heroes';
   info: {
@@ -337,6 +350,7 @@ declare module '@strapi/types' {
       'links.social-link': LinksSocialLink;
       'meta.metadata': MetaMetadata;
       'sections.about': SectionsAbout;
+      'sections.faq': SectionsFaq;
       'sections.hero': SectionsHero;
       'sections.pricing': SectionsPricing;
       'sections.testimonial': SectionsTestimonial;

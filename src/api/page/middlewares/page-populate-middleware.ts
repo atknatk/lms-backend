@@ -10,6 +10,9 @@ const populate = {
       hero: {
         populate: true,
       },
+      faqs: {
+        populate: true,
+      },
       mediaOne: {
         fields: ["url", "alternativeText", "caption", "width", "height"],
       },
