@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_sections_i_frames",
+  "info": {
+    "displayName": "IFrame",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "width": {
+      "type": "string",
+      "required": false,
+      "default": "100%"
+    },
+    "height": {
+      "type": "string",
+      "default": "800px",
+      "required": false
+    }
+  }
+}

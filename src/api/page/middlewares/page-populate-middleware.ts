@@ -22,7 +22,7 @@ const populate = {
       mediaThree: {
         fields: ["url", "alternativeText", "caption", "width", "height"],
       },
-
+   
       masterLinks: {
         populate: true,
       },
@@ -57,6 +57,17 @@ const populate = {
       // },
       testimonials: {
         populate: true
+      },
+      courses: {
+        populate: {
+          imageSrc: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+          authorImageSrc: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+          
+        }
       },
       counters: {
         populate: true

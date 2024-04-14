@@ -39,7 +39,9 @@
         "sections.pricing",
         "sections.testimonial",
         "sections.about",
-        "sections.faq"
+        "sections.faq",
+        "sections.i-frame",
+        "sections.course-list"
       ],
       "pluginOptions": {
         "i18n": {

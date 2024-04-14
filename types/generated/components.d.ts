@@ -122,6 +122,30 @@ export interface SectionsAbout extends Schema.Component {
   };
 }
 
+export interface SectionsCourseList extends Schema.Component {
+  collectionName: 'components_sections_course_lists';
+  info: {
+    displayName: 'CourseList';
+  };
+  attributes: {
+    sectionTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 40;
+      }>;
+    sectionDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    courses: Attribute.Relation<
+      'sections.course-list',
+      'oneToMany',
+      'api::course.course'
+    >;
+  };
+}
+
 export interface SectionsFaq extends Schema.Component {
   collectionName: 'components_sections_faqs';
   info: {
@@ -148,6 +172,19 @@ export interface SectionsHero extends Schema.Component {
     masterLinks: Attribute.Component<'links.button-link', true>;
     featureIconList: Attribute.Component<'shared.feature-icon-list', true>;
     heroImage: Attribute.Media & Attribute.Required;
+  };
+}
+
+export interface SectionsIFrame extends Schema.Component {
+  collectionName: 'components_sections_i_frames';
+  info: {
+    displayName: 'IFrame';
+    description: '';
+  };
+  attributes: {
+    link: Attribute.String & Attribute.Required;
+    width: Attribute.String & Attribute.DefaultTo<'100%'>;
+    height: Attribute.String & Attribute.DefaultTo<'800px'>;
   };
 }
 
@@ -350,8 +387,10 @@ declare module '@strapi/types' {
       'links.social-link': LinksSocialLink;
       'meta.metadata': MetaMetadata;
       'sections.about': SectionsAbout;
+      'sections.course-list': SectionsCourseList;
       'sections.faq': SectionsFaq;
       'sections.hero': SectionsHero;
+      'sections.i-frame': SectionsIFrame;
       'sections.pricing': SectionsPricing;
       'sections.testimonial': SectionsTestimonial;
       'shared.button': SharedButton;
