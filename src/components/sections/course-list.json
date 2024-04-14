@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_sections_course_lists",
+  "info": {
+    "displayName": "CourseList"
+  },
+  "options": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "required": true,
+      "maxLength": 40
+    },
+    "sectionDescription": {
+      "type": "string",
+      "maxLength": 60,
+      "required": true
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course.course"
+    }
+  }
+}
