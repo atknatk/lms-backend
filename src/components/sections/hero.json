@@ -26,12 +26,12 @@
       "component": "shared.feature-icon-list"
     },
     "heroImage": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     }
   }
 }
