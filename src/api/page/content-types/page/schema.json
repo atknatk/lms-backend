@@ -58,6 +58,16 @@
         }
       },
       "component": "shared.seo"
+    },
+    "isRestricted": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }
