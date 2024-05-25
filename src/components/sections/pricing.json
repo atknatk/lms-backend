@@ -20,6 +20,11 @@
     "yearly_discount_percentage": {
       "type": "integer",
       "required": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

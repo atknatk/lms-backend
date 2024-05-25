@@ -16,6 +16,11 @@
     },
     "mainDescription": {
       "type": "text"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

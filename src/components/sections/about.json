@@ -52,6 +52,11 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

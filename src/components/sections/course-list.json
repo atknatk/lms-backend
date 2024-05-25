@@ -1,7 +1,8 @@
 {
   "collectionName": "components_sections_course_lists",
   "info": {
-    "displayName": "CourseList"
+    "displayName": "CourseList",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -19,6 +20,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::course.course"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

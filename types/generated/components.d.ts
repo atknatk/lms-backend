@@ -119,6 +119,9 @@ export interface SectionsAbout extends Schema.Component {
     mediaOne: Attribute.Media & Attribute.Required;
     mediaTwo: Attribute.Media & Attribute.Required;
     mediaThree: Attribute.Media & Attribute.Required;
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
@@ -126,6 +129,7 @@ export interface SectionsCourseList extends Schema.Component {
   collectionName: 'components_sections_course_lists';
   info: {
     displayName: 'CourseList';
+    description: '';
   };
   attributes: {
     sectionTitle: Attribute.String &
@@ -143,6 +147,9 @@ export interface SectionsCourseList extends Schema.Component {
       'oneToMany',
       'api::course.course'
     >;
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
@@ -156,6 +163,9 @@ export interface SectionsFaq extends Schema.Component {
     faqs: Attribute.Relation<'sections.faq', 'oneToMany', 'api::faq.faq'>;
     mainTitle: Attribute.String;
     mainDescription: Attribute.Text;
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
@@ -172,6 +182,9 @@ export interface SectionsHero extends Schema.Component {
     masterLinks: Attribute.Component<'links.button-link', true>;
     featureIconList: Attribute.Component<'shared.feature-icon-list', true>;
     heroImage: Attribute.Media & Attribute.Required;
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
@@ -185,6 +198,9 @@ export interface SectionsIFrame extends Schema.Component {
     link: Attribute.String & Attribute.Required;
     width: Attribute.String & Attribute.DefaultTo<'100%'>;
     height: Attribute.String & Attribute.DefaultTo<'800px'>;
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
@@ -199,6 +215,9 @@ export interface SectionsPricing extends Schema.Component {
     description: Attribute.String;
     plans: Attribute.Component<'elements.pricing-plan', true>;
     yearly_discount_percentage: Attribute.Integer & Attribute.Required;
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
@@ -217,6 +236,9 @@ export interface SectionsTestimonial extends Schema.Component {
       'api::testimonial.testimonial'
     >;
     counters: Attribute.Component<'elements.counter', true>;
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
   };
 }
 
