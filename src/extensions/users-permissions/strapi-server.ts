@@ -62,6 +62,8 @@ module.exports = (plugin) => {
       });
   };
 
+  
+
   // *** custom route ***
   plugin.routes["content-api"].routes.push({
     method: "PUT",

@@ -947,7 +947,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -975,6 +974,13 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    picture: Attribute.String;
+    providerId: Attribute.String;
+    testimonial: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::testimonial.testimonial'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1381,6 +1387,14 @@ export interface ApiPagePage extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    isRestricted: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1512,6 +1526,11 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
       Attribute.DefaultTo<false>;
     position: Attribute.String;
     video_image: Attribute.Media;
+    user: Attribute.Relation<
+      'api::testimonial.testimonial',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
