@@ -1387,6 +1387,14 @@ export interface ApiPagePage extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    isRestricted: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
